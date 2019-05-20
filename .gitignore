@@ -4,3 +4,6 @@ Plugins/
 VRCSDK/
 
 !VRCPrefabs/
+*.unitypackage
+VRCPrefabs/PlaylistManager/LICENSE
+VRCPrefabs/PlaylistManager/README.md
