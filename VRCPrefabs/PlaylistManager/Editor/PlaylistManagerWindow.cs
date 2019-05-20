@@ -238,6 +238,7 @@ namespace VRCPrefabs.PlaylistManager
             {
                 createPlaylist();
             }
+
             GUILayout.Space(5);
 
             if (GUILayout.Button(new GUIContent("Refresh"), EditorStyles.toolbarButton, GUILayout.Width(50)))
@@ -320,14 +321,16 @@ namespace VRCPrefabs.PlaylistManager
 
             string tempName = selectedPlaylist.Name.Replace(" ", "-");
 
-            if (File.Exists(selectedPlaylist.File.Directory.FullName + "\\" + tempName + ".txt"))
-            {
-                ShowNotification(new GUIContent("Playlist \"" + tempName.Replace("-", " ") + "\" already exists"));
-                return;
-            }
             File.WriteAllText(selectedPlaylist.File.FullName, selectedPlaylist.Contents);
 
-            playlists[currentPlaylist].File.MoveTo(playlists[currentPlaylist].File.Directory.FullName + "\\" + tempName + ".txt");
+            if (playlists[currentPlaylist].Name != selectedPlaylist.Name && File.Exists(selectedPlaylist.File.Directory.FullName + "\\" + tempName + ".txt"))
+            {
+                ShowNotification(new GUIContent("Playlist \"" + tempName.Replace("-", " ") + "\" already exists"));
+            }
+            else
+            {
+                playlists[currentPlaylist].File.MoveTo(playlists[currentPlaylist].File.Directory.FullName + "\\" + tempName + ".txt");
+            }
             AssetDatabase.Refresh();
             openPlaylists();
         }
