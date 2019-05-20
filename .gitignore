@@ -1,0 +1,6 @@
+*.meta
+*.unity
+Plugins/
+VRCSDK/
+
+!VRCPrefabs/
